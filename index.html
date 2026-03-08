@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Samba da Jaborandi</title>
+
+    <link rel="stylesheet" href="style/style.css">
+
+</head>
+
+<body>
+
+    <header class="hero">
+
+        <div class="hero-overlay">
+            <h1>Samba da Jaborandi</h1>
+            <p>Galeria de Fotos</p>
+        </div>
+
+    </header>
+
+    <div class="galeria" id="galeria"></div>
+
+    <div id="lightbox" class="lightbox">
+
+        <span class="fechar">&times;</span>
+
+        <button class="nav esquerda">&#10094;</button>
+
+        <img class="lightbox-img" id="lightbox-img">
+
+        <button class="nav direita">&#10095;</button>
+
+        <a id="downloadBtn" download>Baixar imagem</a>
+
+    </div>
+
+    <script>
+
+        const galeria = document.getElementById("galeria");
+
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        const fechar = document.querySelector(".fechar");
+
+        const btnDireita = document.querySelector(".direita");
+        const btnEsquerda = document.querySelector(".esquerda");
+
+        let imagens = [];
+        let indiceAtual = 0;
+
+
+        /* carregar lista de imagens */
+
+        fetch("fotos/images.json")
+
+            .then(res => res.json())
+
+            .then(lista => {
+
+                imagens = lista;
+
+                lista.forEach((nome, index) => {
+
+                    const src = "fotos/" + nome;
+
+                    const img = document.createElement("img");
+
+                    img.src = src;
+
+                    img.loading = "lazy";
+
+                    img.onclick = () => abrirLightbox(index);
+
+                    galeria.appendChild(img);
+
+                });
+
+            });
+
+
+        /* abrir lightbox */
+
+        function abrirLightbox(index) {
+
+            indiceAtual = index;
+
+            const src = "fotos/" + imagens[index];
+
+            lightbox.style.display = "flex";
+
+            lightboxImg.src = src;
+
+            downloadBtn.href = src;
+
+        }
+
+
+        /* trocar imagem */
+
+        function mostrarImagem(index) {
+
+            if (index < 0) index = imagens.length - 1;
+
+            if (index >= imagens.length) index = 0;
+
+            indiceAtual = index;
+
+            const src = "fotos/" + imagens[index];
+
+            lightboxImg.src = src;
+
+            downloadBtn.href = src;
+
+        }
+
+
+        /* navegação */
+
+        function proxima() {
+
+            mostrarImagem(indiceAtual + 1);
+
+        }
+
+        function anterior() {
+
+            mostrarImagem(indiceAtual - 1);
+
+        }
+
+        btnDireita.onclick = proxima;
+
+        btnEsquerda.onclick = anterior;
+
+
+        /* fechar */
+
+        fechar.onclick = () => {
+
+            lightbox.style.display = "none";
+
+        };
+
+
+        /* fechar clicando fora */
+
+        lightbox.onclick = (e) => {
+
+            if (e.target === lightbox) {
+
+                lightbox.style.display = "none";
+
+            }
+
+        };
+
+
+        /* navegação teclado */
+
+        document.addEventListener("keydown", (e) => {
+
+            if (lightbox.style.display === "flex") {
+
+                if (e.key === "ArrowRight") proxima();
+
+                if (e.key === "ArrowLeft") anterior();
+
+                if (e.key === "Escape") lightbox.style.display = "none";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

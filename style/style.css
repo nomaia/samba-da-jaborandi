@@ -1,0 +1,330 @@
+body {
+
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #000;
+
+    color: white;
+
+}
+
+
+/* HERO / CAPA */
+
+.hero {
+
+    height: 70vh;
+
+    background-image: url("../fotos/capa.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+}
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.55);
+
+}
+
+.hero-overlay {
+
+    position: relative;
+
+    text-align: center;
+
+    z-index: 2;
+
+}
+
+.hero-overlay h1 {
+
+    font-size: 48px;
+
+    margin: 0;
+
+    letter-spacing: 2px;
+
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+
+}
+
+.hero-overlay p {
+
+    margin-top: 10px;
+
+    font-size: 18px;
+
+    opacity: 0.9;
+
+}
+
+
+/* GALERIA */
+
+.galeria {
+
+    column-count: 5;
+
+    column-gap: 16px;
+
+    padding: 25px;
+
+    background: #111;
+
+}
+
+.galeria img {
+
+    width: 100%;
+
+    height: auto;
+
+    margin-bottom: 16px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: transform 0.25s, box-shadow 0.25s;
+
+    break-inside: avoid;
+
+}
+
+.galeria img:hover {
+
+    transform: scale(1.03);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+
+}
+
+
+/* LIGHTBOX */
+
+.lightbox {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.95);
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    z-index: 999;
+
+}
+
+.lightbox-img {
+
+    max-width: 90%;
+
+    max-height: 80%;
+
+    border-radius: 8px;
+
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+
+}
+
+
+/* BOTÃO FECHAR */
+
+.fechar {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 35px;
+
+    font-size: 40px;
+
+    cursor: pointer;
+
+    color: white;
+
+    transition: 0.2s;
+
+}
+
+.fechar:hover {
+
+    transform: scale(1.2);
+
+}
+
+
+/* BOTÃO DOWNLOAD */
+
+#downloadBtn {
+
+    margin-top: 20px;
+
+    background: white;
+
+    color: black;
+
+    padding: 12px 25px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+
+}
+
+#downloadBtn:hover {
+
+    background: #ddd;
+
+}
+
+
+/* BOTÕES NAVEGAÇÃO */
+
+.nav {
+
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    background: rgba(0, 0, 0, 0.45);
+
+    border: none;
+
+    color: white;
+
+    font-size: 40px;
+
+    padding: 12px 20px;
+
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    transition: 0.2s;
+
+}
+
+.nav:hover {
+
+    background: rgba(0, 0, 0, 0.75);
+
+}
+
+.esquerda {
+
+    left: 25px;
+
+}
+
+.direita {
+
+    right: 25px;
+
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width:1400px) {
+
+    .galeria {
+
+        column-count: 4;
+
+    }
+
+}
+
+@media (max-width:1000px) {
+
+    .galeria {
+
+        column-count: 3;
+
+    }
+
+}
+
+@media (max-width:700px) {
+
+    .galeria {
+
+        column-count: 2;
+
+    }
+
+    .hero-overlay h1 {
+
+        font-size: 32px;
+
+    }
+
+}
+
+@media (max-width:500px) {
+
+    .galeria {
+
+        column-count: 1;
+
+    }
+
+    .hero {
+
+        height: 50vh;
+
+    }
+
+    .hero-overlay h1 {
+
+        font-size: 26px;
+
+    }
+
+}
